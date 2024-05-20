@@ -37,11 +37,12 @@ export default {
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      loaderActive: false,
     }
   },
   components: {
-    Nav
+    Nav,
   },
   methods: {
     login() {
@@ -69,8 +70,7 @@ export default {
           this.$router.push('/home');
         }
       })
-
-  },
+    },
   },
   provide(){
     return{

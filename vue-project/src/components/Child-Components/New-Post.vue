@@ -3,14 +3,18 @@
         <div class="main-post" v-for="post in posts" :key="post.id">
             <span class="user-details">
                 <img v-bind:src="post.postedBy.pic" class="user-logo" alt="logo">
-                <p class="user-name">{{post.postedBy.name}}</p>
+                  <p class="user-name">{{post.postedBy.name}}</p>
             </span>
             <img :src="post.photo" alt="logo" class="post-image" />
             <span class="int-section">
               <img v-if="post.likes.includes(id)"   @:click="unlikePost(post._id)"   src="../assets/like.svg" class="like-image" alt="like" />
               <img v-else src="../assets/!like.svg" @:click="likePost(post._id)" class="like-image" alt="unlike" />
-              <img src="../assets/comment.svg" class="like-image" alt="comment" />
+              <img src="../assets/comment.svg"      @:click="Comments(post._id)"  class="like-image" alt="comment" />
             </span>
+            <span class="post-desc">
+            <p>{{ post.likes.length }} Likes</p>
+            <p>{{ post.body }}</p>
+          </span>
         </div>
     </section>
   </template>
@@ -54,6 +58,7 @@ export default{
         console.log(response);
       })
     },
+    
   },
 
     components:{
@@ -102,7 +107,7 @@ section{
   align-items: center;
   justify-content: left;
   gap: 15px;
-  padding: 15px 5px;
+  padding: 5px 5px;
 }
 
 .user-logo{
@@ -115,10 +120,15 @@ section{
 }
 
 .int-section{
-  padding: 10px;
+  padding: 2px;
   display: flex;
   align-items: center;
   gap: 10px;  
+}
+
+.post-desc p{
+  padding-left: 8px;
+  font-size: 16px;
 }
 
 
