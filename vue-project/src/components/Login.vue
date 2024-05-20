@@ -1,52 +1,96 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import Main from './Main.vue';
-
-
-</script>
 
 <template>
   <div>
-    <Main />
+    <Nav /> 
     <section>      
-      <form class="form">
-         <p class="form-title">Sign in to your account</p>
+      <form class="form" @:submit.prevent="login">
+         <p class="form-title" >Sign in to your account</p>
           <div class="input-container">
-            <input type="email" placeholder="Enter email">
+            <input type="email" v-model="email" placeholder="Enter email" required>
             <span>
             </span>
         </div>
         <div class="input-container">
-            <input type="password" placeholder="Enter password">
+            <input type="password" v-model="password" placeholder="Enter password" required >
           </div>
-           <button type="submit" class="submit">
+           <button type="submit" class="submit" >
           Sign in
         </button>
   
         <p class="signup-link">
           No account?
-          <a href="" @click="$router.push('/logout')">Sign up</a>
+          <a href="" @click="$router.push('/register')">Sign up</a>
         </p>
-     </form>
-  
+     </form> 
       </section>
-  
-
   <RouterView />
 </div>
 </template>
 
-<style >
+
+<script >
+import { RouterLink, RouterView } from 'vue-router'
+import 'vue-toast-notification/dist/theme-sugar.css';
+import Nav from './Nav.vue';
+export default {
+
+  data() {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+  components: {
+    Nav
+  },
+  methods: {
+    login() {
+      const user = {
+        email: this.email,
+        password: this.password
+      }
+      console.log(user);
+      fetch('https://instagram-83t5.onrender.com/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      }).then((response) => response.json())
+      .then((response) => {
+        console.log("RESPONSE", response)
+        if(response.error){
+          console.log("Invalid Username and Password");
+          this.$toast.error('Invalid Username and Password');
+        }else{
+          this.$toast.success('Login successful');
+          let token = localStorage.setItem('token', response.token)
+          localStorage.setItem('id', response.user._id)
+          this.$router.push('/home');
+        }
+      })
+
+  },
+  },
+  provide(){
+    return{
+      token : localStorage.getItem('token'),
+      id : localStorage.getItem('id')
+    }
+  }
+}
+</script>
+
+<style scoped>
 section{
   height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 form {
-  background-color: #fff;
+  background-color: white;
   display: block;
   padding: 3rem;
   max-width: 950px;
@@ -58,25 +102,25 @@ form {
 }
 
 .form-title {
-  font-size: 2.25rem;
+  font-size: 1.75rem;
   line-height: 1.75rem;
   font-weight: 600;
   text-align: center;
-  color: #000;
+  color: black;
 }
 
 .input-container {
   position: relative;
 }
 
-.input-container input, .form button {
+.input-container input{
   outline: none;
-  border: 1px solid #e5e7eb;
+  border: 1px solid white;
   margin: 8px 0;
 }
 
 .input-container input {
-  background-color: #fff;
+  background-color: white;
   padding: 1.5rem;
   padding-right: 3rem;
   font-size: 0.875rem;
@@ -86,10 +130,16 @@ form {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
+.form button{
+  margin-left:45px;
+  margin-top: 15px;
+
+}
+
 .submit {
   padding: 15px 35px;
   background-color: #4F46E5;
-  color: #ffffff;
+  color: white;
   font-weight: 500;
   width: 80%;
   border-radius: 0.5rem;

@@ -1,22 +1,41 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-</script>
-
 <template>
   <div class="main-section">
     <header>
-        <img src="./logo.png" alt="logo" />
+        <img src="./assets/logo.png" alt="logo" />
     </header>
     <div>
-<button @click="$router.push('/login')">Login</button>
-<button @click="$router.push('/logout')">Logout</button>
-
- <!-- <router-link to="/logout">Logout</router-link> -->
+      <button @click="$router.push('/login')" v-show="!token">Login</button>
+      <button v-if="!token" @click="$router.push('/register')">Register</button>
+      <button v-else @:click="logout">Logout</button>
+      <!-- <button @click="$router.push('/logout')">{{!token ? 'Login' : 'Logout'}}</button> -->
     </div>
-
   <RouterView />
-</div>
+  </div>
 </template>
+
+<script >
+import { RouterLink, RouterView } from 'vue-router'
+export default{
+  
+  data(){
+    return{
+
+    }
+  },
+  methods:{
+    logout(){
+      this.$toast.success('Logout successful');
+      localStorage.removeItem('token');
+      this.$router.push('/login');
+      console.log("token removed");
+    }
+  },
+  inject:[
+    'token'
+  ]
+}
+</script>
+
 
 <style >
   img{
@@ -59,6 +78,6 @@ button:hover {
 
 button:active {
   box-shadow: inset 0px 0.1em 0.6em #3c4fe0;
-  transform: translateY(0em);
+  transform: translateY(0.2em);
 }
 </style>

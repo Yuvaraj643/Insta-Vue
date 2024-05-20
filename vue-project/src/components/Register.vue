@@ -1,21 +1,64 @@
-<script setup>
+<script >
 import { RouterLink, RouterView } from 'vue-router'
-import Main from './Main.vue';
+import axios from 'axios';
+import 'vue-toast-notification/dist/theme-sugar.css';
+import Nav from './Nav.vue';
+export default {
+  data(){
+    return{
+      name: '',
+      email: '',
+      password: ''
+    }
+  },
+  components: {
+    Nav
+  },
+  methods: {
+    submit(){
+      const user = {
+        name: this.name,
+        email: this.email,
+        password: this.password
+      }
+      console.log(user);
+      const response = axios.post('https://instagram-83t5.onrender.com/signup',
+        user
+      ).then((data) => {
+        console.log(data);
+        if(data.error){
+          console.log("Invalid Username and Password");
+        }else{
+          this.$toast.success('Account Created Successfully');
+          this.$router.push('/login');
+        }
+      })
+    }
+  },
+  provide(){
+    return{
+      token : localStorage.getItem('token')
+    }
+  },  inject:[
+    'token'
+  ]
+}
 </script>
 
 <template>
   <div>
-    <Main />
+    <Nav />
     <section>      
-      <form class="form">
+      <form class="form" @:submit.prevent="submit">
          <p class="form-title">Create your account</p>
+         <div class="input-container">
+            <input type="name" placeholder="Enter name" v-model="name" required>
+        </div>
           <div class="input-container">
-            <input type="email" placeholder="Enter email">
-            <span>
-            </span>
+            <input type="email" placeholder="Enter email" v-model="email" required>
         </div>
         <div class="input-container">
-            <input type="password" placeholder="Enter password">
+            <input type="password" placeholder="Enter password" v-model="password" required>
           </div>
            <button type="submit" class="submit">
           Register
@@ -34,7 +77,7 @@ import Main from './Main.vue';
 </div>
 </template>
 
-<style >
+<style scoped>
 section{
   height: 80vh;
   display: flex;
@@ -47,7 +90,7 @@ form {
   display: block;
   padding: 3rem;
   max-width: 950px;
-  height: 400px;
+  height: 450px;
   border: 1px solid rgb(145, 144, 195);
   border-radius: 0.5rem;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
