@@ -7,23 +7,54 @@
             </span>
             <img :src="post.photo" alt="logo" class="post-image" />
             <span class="int-section">
-              <img v-if="post.likes.includes(id)" src="../assets/like.svg" class="like-image" alt="like" />
-              <img v-else src="../assets/!like.svg" class="like-image" alt="unlike" />
+              <img v-if="post.likes.includes(id)"   @:click="unlikePost(post._id)"   src="../assets/like.svg" class="like-image" alt="like" />
+              <img v-else src="../assets/!like.svg" @:click="likePost(post._id)" class="like-image" alt="unlike" />
               <img src="../assets/comment.svg" class="like-image" alt="comment" />
             </span>
         </div>
     </section>
   </template>
-
-
 <script>
 
 export default{
     data(){
         return{
-          id : localStorage.getItem('id')
+          id : localStorage.getItem('id'),
         }
     },
+    methods:{
+      likePost(id){
+        fetch('https://instagram-83t5.onrender.com/like', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization' : "Bearer " + localStorage.getItem('token'),
+          },
+          body: JSON.stringify({
+            postId : id
+          })
+        }).then((response) => response.json())
+        .then((response) => {
+          console.log(response);
+        })
+      },
+    unlikePost(id){
+      fetch('https://instagram-83t5.onrender.com/unlike', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization' : "Bearer " + localStorage.getItem('token'),
+        },
+        body: JSON.stringify({
+          postId : id
+        })
+      }).then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+      })
+    },
+  },
+
     components:{
         Function
     },
