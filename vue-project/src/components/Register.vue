@@ -29,7 +29,7 @@ export default {
         if(data.error){
           console.log("Invalid Username and Password");
         }else{
-          this.$toast.success('Account Created Successfully');
+          this.$toast.success('Account has been Created Successfully');
           this.$router.push('/login');
         }
       })

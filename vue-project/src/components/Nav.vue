@@ -24,7 +24,7 @@ export default{
   },
   methods:{
     logout(){
-      this.$toast.success('Logout successful');
+      this.$toast.success('You logged out successfully');
       localStorage.removeItem('token');
       this.$router.push('/login');
       console.log("token removed");
