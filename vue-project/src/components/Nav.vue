@@ -3,76 +3,23 @@
     <header>
       <img src="./assets/logo.png" alt="logo" />
     </header>
-    <div>
+    <div class="buttons-section">
       <button @click="$router.push('/login')" v-show="!token">Login</button>
       <button v-if="!token" @click="$router.push('/register')">Register</button>
-      <button v-else @:click="logout">Logout</button>
+      <div v-else class="buttons-section">
+        <button @:click="logout">Logout</button>
+        <img :src="user.pic" class="user-logo" @click="$router.push({ path: `/profile/${user._id}` })" alt="logo" />
+      </div>
     </div>
     <RouterView />
   </div>
 </template>
 
-<script>
-import { RouterLink, RouterView } from "vue-router";
-export default {
-  data() {
-    return {};
-  },
-  methods: {
-    logout() {
-      this.$toast.success("You logged out successfully");
-      localStorage.removeItem("token");
-      this.$router.push("/login");
-      console.log("token removed");
-    },
-  },
-  inject: ["token"],
-};
-</script>
+
 
 <style>
 img {
   width: 170px;
 }
 
-.main-section {
-  width: 100%;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-.main-section div button {
-  margin-right: 25px;
-}
-
-button {
-  font-size: 18px;
-  display: inline-block;
-  outline: 0;
-  border: 0;
-  cursor: pointer;
-  will-change: box-shadow, transform;
-  background: radial-gradient(100% 100% at 100% 0%, #89e5ff 0%, #5468ff 100%);
-  box-shadow: 0px 0.01em 0.01em rgb(45 35 66 / 40%),
-    0px 0.3em 0.7em -0.01em rgb(45 35 66 / 30%),
-    inset 0px -0.01em 0px rgb(58 65 111 / 50%);
-  padding: 0 2em;
-  border-radius: 0.3em;
-  color: #fff;
-  height: 2.6em;
-  text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
-  transition: box-shadow 0.15s ease, transform 0.15s ease;
-}
-
-button:hover {
-  box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%),
-    0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px #3c4fe0;
-  transform: translateY(-0.1em);
-}
-
-button:active {
-  box-shadow: inset 0px 0.1em 0.6em #3c4fe0;
-  transform: translateY(0.2em);
-}
 </style>

@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <Nav /> 
+    <!-- <Nav />  -->
     <section>      
       <form class="form" @:submit.prevent="login">
          <p class="form-title" >Sign in to your account</p>
@@ -39,6 +39,7 @@ export default {
       email: '',
       password: '',
       loaderActive: false,
+      user : null
     }
   },
   components: {
@@ -67,6 +68,9 @@ export default {
           this.$toast.success('Login successful');
           let token = localStorage.setItem('token', response.token)
           localStorage.setItem('id', response.user._id)
+          this.user = response.user
+          localStorage.setItem('user', JSON.stringify(this.user))
+          console.log(user);
           this.$router.push('/home');
         }
       })
@@ -95,9 +99,8 @@ form {
   padding: 3rem;
   max-width: 950px;
   height: 400px;
-  border: 1px solid rgb(145, 144, 195);
   border-radius: 0.5rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 
 }
 
@@ -111,12 +114,13 @@ form {
 
 .input-container {
   position: relative;
+
 }
 
 .input-container input{
   outline: none;
-  border: 1px solid white;
   margin: 8px 0;
+
 }
 
 .input-container input {
@@ -125,9 +129,9 @@ form {
   padding-right: 3rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
-  width: 300px;
+  width: 250px;
   border-radius: 0.5rem;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .form button{
@@ -156,6 +160,33 @@ form {
 
 .signup-link a {
   text-decoration: underline;
+}
+
+/* Responsive Styles */
+
+@media (max-width: 768px) {
+  section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 80%;
+    margin: 0 auto;
+    
+  }
+
+  form{
+    max-width: 80%;
+    height: 40vh;
+    margin-top : 60px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
+  }
+  .input-container input {
+    width: 75%;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
+  }
 }
 
 </style>

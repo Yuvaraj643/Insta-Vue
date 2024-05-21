@@ -3,6 +3,7 @@ import App from '../App.vue'
 import Login from '@/components/Login.vue'
 import Register from '@/components/Register.vue'
 import Home from '@/components/Home.vue'
+import Profie from '@/components/Profile.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -27,6 +28,11 @@ const router = createRouter({
       name : 'Register',
       component : Register,
     },
+    {
+      path: '/profile/:id',
+      name : 'Profile',
+      component : Profie,
+    }
   ]
 })
 

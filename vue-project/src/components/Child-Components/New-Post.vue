@@ -43,7 +43,7 @@
         <p>{{ post.comments.length }} Comments</p>
 
         <p v-for="comment in post.comments" :key="comment.id">
-          <strong>{{ comment.postedBy.name }}</strong> {{ comment.text }}
+          <strong>{{ comment.postedBy.name }}: </strong> {{ comment.text }}
         </p>
       </span>
     </div>
@@ -54,11 +54,6 @@ export default {
   data() {
     return {
       id: localStorage.getItem("id"),
-    };
-  },
-  provide() {
-    return {
-      posts: this.posts,
     };
   },
   methods: {
@@ -95,10 +90,6 @@ export default {
         });
     },
     commentPost(text, id) {
-      if (text == "") {
-        this.$toast.error("Comment cannot be empty");
-        return;
-      } else {
         fetch("https://instagram-83t5.onrender.com/comment", {
           method: "PUT",
           headers: {
@@ -117,7 +108,6 @@ export default {
           });
       }
     },
-  },
   components: {
     Function,
   },

@@ -1,3 +1,42 @@
+<template>
+  <div>
+    <!-- <Nav /> -->
+    <section>
+      <form class="form" @:submit.prevent="submit">
+        <p class="form-title">Create your account</p>
+        <div class="input-container">
+          <input type="name" placeholder="Enter name" v-model="name" required />
+        </div>
+        <div class="input-container">
+          <input
+            type="email"
+            placeholder="Enter email"
+            v-model="email"
+            required
+          />
+        </div>
+        <div class="input-container">
+          <input
+            type="password"
+            placeholder="Enter password"
+            v-model="password"
+            required
+          />
+        </div>
+        <button type="submit" class="submit">Register</button>
+
+        <p class="signup-link">
+          Already have a Account?
+          <a href="" @click="$router.push('/login')">Login</a>
+        </p>
+      </form>
+    </section>
+
+    <RouterView />
+  </div>
+</template>
+
+
 <script>
 import { RouterLink, RouterView } from "vue-router";
 import axios from "axios";
@@ -44,43 +83,7 @@ export default {
 };
 </script>
 
-<template>
-  <div>
-    <Nav />
-    <section>
-      <form class="form" @:submit.prevent="submit">
-        <p class="form-title">Create your account</p>
-        <div class="input-container">
-          <input type="name" placeholder="Enter name" v-model="name" required />
-        </div>
-        <div class="input-container">
-          <input
-            type="email"
-            placeholder="Enter email"
-            v-model="email"
-            required
-          />
-        </div>
-        <div class="input-container">
-          <input
-            type="password"
-            placeholder="Enter password"
-            v-model="password"
-            required
-          />
-        </div>
-        <button type="submit" class="submit">Register</button>
 
-        <p class="signup-link">
-          Already have a Account?
-          <a href="" @click="$router.push('/login')">Login</a>
-        </p>
-      </form>
-    </section>
-
-    <RouterView />
-  </div>
-</template>
 
 <style scoped>
 section {
@@ -92,15 +95,11 @@ section {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 form {
-  background-color: #fff;
   display: block;
   padding: 3rem;
   max-width: 950px;
   height: 450px;
-  border: 1px solid rgb(145, 144, 195);
-  border-radius: 0.5rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .form-title {
@@ -117,7 +116,6 @@ form {
 
 .input-container input {
   outline: none;
-  border: 1px solid #e5e7eb;
   margin: 8px 0;
 }
 
@@ -129,7 +127,7 @@ form {
   line-height: 1.25rem;
   width: 300px;
   border-radius: 0.5rem;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 .form button {
   margin-left: 70px;
@@ -156,4 +154,21 @@ form {
 .signup-link a {
   text-decoration: underline;
 }
+
+/* Responsive Styles */
+
+@media (max-width: 768px) {
+  form {
+    padding: 2rem;
+    height: 450px;
+    width: 80%;
+  }
+  .input-container input{
+    width: 76%;
+  }
+  section{
+  height: 80vh;
+}
+}
+
 </style>

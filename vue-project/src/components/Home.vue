@@ -1,6 +1,6 @@
 <template>
     <section>
-      <Nav />
+      <!-- <Nav /> -->
       <section v-for="post in responseData" :key="post.id">
         <NewPost :posts="responseData"/>
       </section>
