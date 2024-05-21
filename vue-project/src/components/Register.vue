@@ -99,6 +99,7 @@ form {
   padding: 3rem;
   max-width: 950px;
   height: 450px;
+  border-radius: 1.5rem;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
@@ -137,7 +138,8 @@ form {
   padding: 15px 35px;
   background-color: #4f46e5;
   color: #ffffff;
-  font-weight: 500;
+  font-weight: 550;
+  font-size: 18px;
   width: 60%;
   border-radius: 0.5rem;
   text-transform: uppercase;
