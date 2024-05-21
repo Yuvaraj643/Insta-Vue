@@ -1,68 +1,62 @@
 <template>
   <div class="main-section">
     <header>
-        <img src="./assets/logo.png" alt="logo" />
+      <img src="./assets/logo.png" alt="logo" />
     </header>
     <div>
       <button @click="$router.push('/login')" v-show="!token">Login</button>
       <button v-if="!token" @click="$router.push('/register')">Register</button>
       <button v-else @:click="logout">Logout</button>
-      <!-- <button @click="$router.push('/logout')">{{!token ? 'Login' : 'Logout'}}</button> -->
     </div>
-  <RouterView />
+    <RouterView />
   </div>
 </template>
 
-<script >
-import { RouterLink, RouterView } from 'vue-router'
-export default{
-  
-  data(){
-    return{
-
-    }
+<script>
+import { RouterLink, RouterView } from "vue-router";
+export default {
+  data() {
+    return {};
   },
-  methods:{
-    logout(){
-      this.$toast.success('You logged out successfully');
-      localStorage.removeItem('token');
-      this.$router.push('/login');
+  methods: {
+    logout() {
+      this.$toast.success("You logged out successfully");
+      localStorage.removeItem("token");
+      this.$router.push("/login");
       console.log("token removed");
-    }
+    },
   },
-  inject:[
-    'token'
-  ]
-}
+  inject: ["token"],
+};
 </script>
 
+<style>
+img {
+  width: 170px;
+}
 
-<style >
-  img{
-    width : 170px;
-  }
+.main-section {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.main-section div button {
+  margin-right: 25px;
+}
 
-  .main-section{
-    width: 100%;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
-  .main-section div button{
-    margin-right: 25px;
-  }
-
-
-  button {
+button {
   font-size: 18px;
   display: inline-block;
   outline: 0;
   border: 0;
   cursor: pointer;
-  will-change: box-shadow,transform;
-  background: radial-gradient( 100% 100% at 100% 0%, #89E5FF 0%, #5468FF 100% );
-  box-shadow: 0px 0.01em 0.01em rgb(45 35 66 / 40%), 0px 0.3em 0.7em -0.01em rgb(45 35 66 / 30%), inset 0px -0.01em 0px rgb(58 65 111 / 50%);
+  will-change: box-shadow, transform;
+  background: radial-gradient(100% 100% at 100% 0%, #89e5ff 0%, #5468ff 100%);
+  box-shadow: 0px 0.01em 0.01em rgb(45 35 66 / 40%),
+    0px 0.3em 0.7em -0.01em rgb(45 35 66 / 30%),
+    inset 0px -0.01em 0px rgb(58 65 111 / 50%);
   padding: 0 2em;
   border-radius: 0.3em;
   color: #fff;
@@ -72,7 +66,8 @@ export default{
 }
 
 button:hover {
-  box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%), 0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px #3c4fe0;
+  box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%),
+    0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px #3c4fe0;
   transform: translateY(-0.1em);
 }
 
