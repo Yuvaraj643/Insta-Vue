@@ -136,9 +136,8 @@ form {
   line-height: 1.25rem;
   width: 250px;
   border-radius: 0.5rem;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
 }
 
 .form button {
@@ -155,7 +154,7 @@ form {
   margin-left: 12%;
   border-radius: 0.8rem;
   text-transform: uppercase;
-  
+  cursor: pointer;
 }
 
 .signup-link {
@@ -184,9 +183,8 @@ form {
   }
   .input-container input {
     width: 75%;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+ 
   }
   .form button {
     text-align: center;

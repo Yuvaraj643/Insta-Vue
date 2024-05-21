@@ -1,9 +1,8 @@
 <template>
   <div>
     <nav>
-      <img src="./components/assets/logo.png" alt="logo" />
+      <img src="./components/assets/logo.png" @click="$router.push('/')" alt="logo" />
       <div class="buttons-section">
-        <!-- <li><Button>Home</Button></li> -->
         <Button @click="$router.push('/login')" v-show="!token">Login</Button>
         <Button v-if="!token" @click="$router.push('/register')"
           >Register</Button>
@@ -57,6 +56,7 @@ nav {
 
 nav img {
   width: 150px;
+  cursor: pointer;
 }
 
 .main-section {
@@ -106,6 +106,7 @@ button:active {
   border: 1px solid black;
   border-radius: 50%;
   background-position: center;
+  cursor: pointer;
 }
 .buttons-section {
   display: flex;
