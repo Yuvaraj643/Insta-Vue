@@ -21,6 +21,12 @@
           class="like-image"
           alt="unlike"
         />
+        <img
+          src="../assets/comment.svg"
+          @:click="commentPost(text, post._id)"
+          class="like-image"
+          alt="comment"
+        />
       </span>
       <span class="post-desc">
         <p>{{ post.likes.length }} Likes</p>
@@ -31,19 +37,26 @@
             class="comment-input"
             v-model="text"
             placeholder="Add a comment..."
-          />
-
-          <img
-            src="../assets/comment.svg"
-            @:click="commentPost(text, post._id)"
-            class="like-image"
-            alt="comment"
+            @keyup.enter="commentPost(text, post._id)"
           />
         </span>
         <p>{{ post.comments.length }} Comments</p>
 
-        <p v-for="comment in post.comments" :key="comment.id">
-          <strong>{{ comment.postedBy.name }}: </strong> {{ comment.text }}
+        <p
+          v-for="comment in post.comments"
+          :key="comment.id"
+          class="comment-section1"
+        >
+          <span>
+            <strong>{{ comment.postedBy.name }}: </strong>
+            <span> {{ comment.text }}</span>
+          </span>
+          <!-- <img
+            src="../assets/delete.svg"
+            @:click="DeletePost(comment._id,post._id)"
+            class="delete"
+            alt="comment"
+          /> -->
         </p>
       </span>
     </div>
@@ -71,6 +84,8 @@ export default {
         .then((response) => response.json())
         .then((response) => {
           console.log(response);
+          this.$toast.success("Post liked successfully");
+          window.location.reload();
         });
     },
     unlikePost(id) {
@@ -87,27 +102,50 @@ export default {
         .then((response) => response.json())
         .then((response) => {
           console.log(response);
+          this.$toast.success("Post unliked successfully");
+          window.location.reload();
         });
     },
     commentPost(text, id) {
-        fetch("https://instagram-83t5.onrender.com/comment", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-          body: JSON.stringify({
-            postId: id,
-            text: text,
-          }),
-        })
-          .then((response) => response.json())
-          .then((response) => {
-            console.log(response);
-            this.$toast.success("Comment added successfully");
-          });
-      }
+      fetch("https://instagram-83t5.onrender.com/comment", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          postId: id,
+          text: text,
+        }),
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          console.log(response);
+          this.$toast.success("Comment added successfully");
+          this.text = "";
+          window.location.reload();
+        });
     },
+    DeletePost(id, postId) {
+      fetch(`https://instagram-83t5.onrender.com/delete-comment/${postId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          postId: postId,
+          commentId: id,
+        }),
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          console.log(response);
+          this.$toast.success("Comment deleted successfully");
+          window.location.reload();
+        });
+    },
+  },
   components: {
     Function,
   },
@@ -124,7 +162,13 @@ export default {
 .comment-section {
   display: flex;
   align-items: center;
-  gap: 10px;
+  /* gap: 10px; */
+}
+
+.comment-section1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .comment-input {
   width: 85%;
@@ -138,6 +182,12 @@ export default {
 .like-image {
   width: 30px;
   height: 30px;
+  cursor: pointer;
+}
+
+.delete {
+  width: 30px;
+  cursor: pointer;
 }
 section {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -191,5 +241,6 @@ section {
 .post-desc p {
   padding-left: 8px;
   font-size: 16px;
+  margin: 5px 0px;
 }
 </style>

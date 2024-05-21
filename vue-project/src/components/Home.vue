@@ -1,6 +1,5 @@
 <template>
     <section>
-      <!-- <Nav /> -->
       <section v-for="post in responseData" :key="post.id">
         <NewPost :posts="responseData"/>
       </section>
@@ -8,7 +7,6 @@
 </template>
 
 <script>
-import Nav from './Nav.vue';
 import NewPost from './Child-Components/New-Post.vue';
 export default{
     data(){
@@ -17,7 +15,6 @@ export default{
         }
     },
     components: {
-        Nav,
         NewPost,
     },
     provide(){

@@ -23,6 +23,9 @@
             required
           />
         </div>
+        <p>Upload Profile Pic : </p>
+        <input type="file" accept="image/jpeg" @change="uploadImage" />
+
         <button type="submit" class="submit">Register</button>
 
         <p class="signup-link">
@@ -35,7 +38,6 @@
     <RouterView />
   </div>
 </template>
-
 
 <script>
 import { RouterLink, RouterView } from "vue-router";
@@ -83,8 +85,6 @@ export default {
 };
 </script>
 
-
-
 <style scoped>
 section {
   height: 80vh;
@@ -100,7 +100,9 @@ form {
   max-width: 950px;
   height: 450px;
   border-radius: 1.5rem;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .form-title {
@@ -129,7 +131,6 @@ form {
   width: 300px;
   border-radius: 0.5rem;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-
 }
 .form button {
   margin-left: 70px;
@@ -167,12 +168,11 @@ form {
     height: 450px;
     width: 80%;
   }
-  .input-container input{
+  .input-container input {
     width: 76%;
   }
-  section{
-  height: 80vh;
+  section {
+    height: 80vh;
+  }
 }
-}
-
 </style>

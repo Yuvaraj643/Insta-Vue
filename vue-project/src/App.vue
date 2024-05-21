@@ -37,6 +37,7 @@ export default {
       localStorage.removeItem("token");
       this.$router.push("/login");
       console.log("token removed");
+      window.location.reload();
     },
   },
   inject: ["token"],
