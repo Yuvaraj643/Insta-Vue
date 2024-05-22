@@ -1,6 +1,7 @@
 <template>
   <Loader :active="loaderActive" />
   <section v-show="!loaderActive">
+    <br />
     <main>
       <div>
         <img :src="pic" alt="logo" />
@@ -10,7 +11,7 @@
           {{ data.name }}
         </h2>
         <div class="follow-section">
-          <button @:click="follow">Follow</button>
+          <button @:click="follow(userid)">Follow</button>
         </div>
         <span class="label-section">
           <span>
@@ -89,6 +90,7 @@ export default {
       Userposts: null,
       UserData: null,
       id: this.$route.params.id,
+      userid : localStorage.getItem("id"),
       // user: JSON.parse(localStorage.getItem("user")),
       // pic: JSON.parse(localStorage.getItem("user")).pic,
       // name: JSON.parse(localStorage.getItem("user")).name,
@@ -100,6 +102,24 @@ export default {
     };
   },
   methods: {
+    follow(userid) {
+      console.log(userid);
+      fetch(`https://instagram-83t5.onrender.com/follow/`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          userid: userid,
+        }),
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          console.log(response);
+         
+        });
+    },
     hideLoader() {
       this.loaderActive = false;
     },
@@ -301,36 +321,36 @@ input {
   .user-details h2 {
     margin: 10px;
   }
-  #main-post{
+  #main-post {
     width: 100%;
     padding: 0px;
     /* padding: 6px; */
 
-    margin: 0px auto
+    margin: 0px auto;
   }
 
-  .main-post{
+  .main-post {
     width: 100%;
     margin: 0px;
     padding: 5px;
     /* margin: 0 auto; */
   }
 
-  #main-post-section{
+  #main-post-section {
     width: 100%;
     padding: 2px;
   }
-.comment-input{
-  width: 70%;
-  margin-bottom: 15px;
-}
-.post-details{
-  width: 100%;
-  /* padding-left: 45px ; */
-}
+  .comment-input {
+    width: 70%;
+    margin-bottom: 15px;
+  }
+  .post-details {
+    width: 100%;
+    /* padding-left: 45px ; */
+  }
 
-.label-section{
-  margin-left: 0px;
-}
+  .label-section {
+    margin-left: 0px;
+  }
 }
 </style>
