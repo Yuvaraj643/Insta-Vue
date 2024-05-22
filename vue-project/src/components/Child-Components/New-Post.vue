@@ -249,7 +249,8 @@ section {
 
 @media (max-width: 550px) { 
   .main-post {
-    width: 90%;
+    width: 95%;
+    padding: 10px;
   }
 
   .post-image {

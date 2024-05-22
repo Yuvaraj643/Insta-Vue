@@ -108,6 +108,7 @@ export default {
     },
   },
   mounted() {
+    window.scrollTo(0, 0);
     this.showLoader();
     fetch(`https://instagram-83t5.onrender.com/user/${this.id}`, {
       headers: {
@@ -326,6 +327,10 @@ input {
 .post-details{
   width: 100%;
   /* padding-left: 45px ; */
+}
+
+.label-section{
+  margin-left: 0px;
 }
 }
 </style>
