@@ -6,7 +6,7 @@
         type="text"
         class="search"
         v-model="searchvalue"
-        placeholder="Search by Name"
+        placeholder="Search User by Name"
         @:input="search(searchvalue)"
       />
     </section>
