@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <Nav />  -->
     <section>
       <form class="form" @:submit.prevent="login">
         <p class="form-title">Sign in to your account</p>
@@ -36,7 +35,6 @@
 <script>
 import { RouterLink, RouterView } from "vue-router";
 import "vue-toast-notification/dist/theme-sugar.css";
-import Nav from "./Nav.vue";
 export default {
   data() {
     return {
@@ -47,9 +45,15 @@ export default {
     };
   },
   components: {
-    Nav,
+    
   },
   methods: {
+    showLoader() {
+      this.loaderActive = true;
+    },
+    hideLoader() {
+      this.loaderActive = false;
+    },
     login() {
       const user = {
         email: this.email,
@@ -65,20 +69,21 @@ export default {
       })
         .then((response) => response.json())
         .then((response) => {
-          console.log("RESPONSE", response);
-          if (response.error) {
-            console.log("Invalid Username and Password");
-            this.$toast.error("Invalid Username and Password");
-          } else {
-            this.$toast.success("Login successful");
-            let token = localStorage.setItem("token", response.token);
-            localStorage.setItem("id", response.user._id);
-            this.user = response.user;
-            localStorage.setItem("user", JSON.stringify(this.user));
-            console.log(user);
-            this.$router.push("/home");
-          }
-        });
+            console.log("RESPONSE", response);
+            if (response.error) {
+              console.log("Invalid Username and Password");
+              this.$toast.error("Invalid Username and Password");
+            } else {
+              this.$toast.success("Login successful");
+              let token = localStorage.setItem("token", response.token);
+              localStorage.setItem("id", response.user._id);
+              this.user = response.user;
+              localStorage.setItem("user", JSON.stringify(this.user));
+              console.log(user);
+              this.$router.push("/home");
+            }
+          this.hideLoader();
+        }, 3000);
     },
   },
   provide() {
@@ -137,7 +142,6 @@ form {
   width: 250px;
   border-radius: 0.5rem;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-
 }
 
 .form button {
@@ -184,7 +188,6 @@ form {
   .input-container input {
     width: 75%;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
- 
   }
   .form button {
     text-align: center;
@@ -201,7 +204,7 @@ form {
     margin-top: 0px;
   }
 
-  .form-title{
+  .form-title {
     font-size: 25px;
   }
 }

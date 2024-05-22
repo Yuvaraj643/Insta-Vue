@@ -1,6 +1,5 @@
 <template>
   <section>
-    <!-- <Nav /> -->
     <main >
       <div>
         <img :src="pic" alt="logo" />
@@ -22,7 +21,6 @@
 </template>
 
 <script>
-import Nav from "./Nav.vue";
 export default {
   data() {
     return {
@@ -54,7 +52,7 @@ export default {
       });
   },
   components: {
-    Nav,
+    
   },
   provide() {
     return {

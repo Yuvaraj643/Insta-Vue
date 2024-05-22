@@ -1,11 +1,17 @@
 <template>
   <div>
     <nav>
-      <img src="./components/assets/logo.png" @click="$router.push('/')" alt="logo" />
+      <img
+        src="./components/assets/logo.png"
+        @click="$router.push('/')"
+        alt="logo"
+      />
+      <!-- <h6>token === {{ token }}</h6> -->
       <div class="buttons-section">
-        <Button @click="$router.push('/login')" v-show="!token">Login</Button>
+        <Button @click="$router.push('/login')" v-if="!token">Login</Button>
         <Button v-if="!token" @click="$router.push('/register')"
-          >Register</Button>
+          >Register</Button
+        >
         <div v-else class="buttons-section">
           <button @:click="logout">Logout</button>
           <img
@@ -28,8 +34,21 @@ export default {
   data() {
     return {
       user: JSON.parse(localStorage.getItem("user")),
-      token: localStorage.getItem("token"),
+      token: localStorage.getItem('token')
     };
+  },
+  computed:{
+      
+  },
+  watch:{
+     
+  },
+  mounted() {
+    // if(localStorage.token){
+    //   this.token = localStorage.token;
+    // }
+    console.log('my name');
+    window.addEventListener('storage', this.myfun)
   },
   methods: {
     logout() {
@@ -37,10 +56,12 @@ export default {
       localStorage.removeItem("token");
       this.$router.push("/login");
       console.log("token removed");
-      window.location.reload();
     },
+    myfun(event){
+      console.log('event exe :', event);
+    }
   },
-  inject: ["token"],
+  // inject: ["token"],
 };
 </script>
 
@@ -120,25 +141,23 @@ button:active {
 /* Responsive styles */
 
 @media (max-width: 768px) {
-  nav img{
+  nav img {
     width: 125px;
   }
 }
 
 @media (max-width: 480px) {
-  nav{
+  nav {
     padding: 0 8px;
   }
-  nav img{
+  nav img {
     width: 115px;
-
   }
-  button{
+  button {
     font-size: 14px;
   }
-  .buttons-section{
+  .buttons-section {
     gap: 10px;
   }
 }
-
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <!-- <Nav /> -->
+  <Loader :active="loaderActive" />
+  <div v-show="!loaderActive">
     <section>
       <form class="form" @:submit.prevent="submit">
         <p class="form-title">Create your account</p>
@@ -23,11 +23,7 @@
             required
           />
         </div>
-        <p>Upload Profile Pic : </p>
-        <input type="file" accept="image/jpeg" @change="uploadImage" />
-
         <button type="submit" class="submit">Register</button>
-
         <p class="signup-link">
           Already have a Account?
           <a href="" @click="$router.push('/login')">Login</a>
@@ -43,36 +39,48 @@
 import { RouterLink, RouterView } from "vue-router";
 import axios from "axios";
 import "vue-toast-notification/dist/theme-sugar.css";
-import Nav from "./Nav.vue";
+import Loader from "./Child-Components/Loader.vue";
 export default {
   data() {
     return {
       name: "",
       email: "",
       password: "",
+      loaderActive: false,
     };
   },
   components: {
-    Nav,
+    Loader,
   },
   methods: {
+    showLoader() {
+      this.loaderActive = true;
+    },
+    hideLoader() {
+      this.loaderActive = false;
+    },
     submit() {
+      this.showLoader();
       const user = {
         name: this.name,
         email: this.email,
         password: this.password,
+        image: this.image,
       };
       console.log(user);
       const response = axios
         .post("https://instagram-83t5.onrender.com/signup", user)
         .then((data) => {
-          console.log(data);
-          if (data.error) {
-            console.log("Invalid Username and Password");
-          } else {
-            this.$toast.success("Account has been Created Successfully");
-            this.$router.push("/login");
-          }
+          setTimeout(() => {
+            console.log(data);
+            if (data.error) {
+              console.log("Invalid Username and Password");
+            } else {
+              this.$toast.success("Account has been Created Successfully");
+              this.$router.push("/login");
+            }
+          });
+          this.hideLoader();
         });
     },
   },
@@ -98,7 +106,7 @@ form {
   display: block;
   padding: 3rem;
   max-width: 950px;
-  height: 450px;
+  height: 550px;
   border-radius: 1.5rem;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
@@ -122,6 +130,24 @@ form {
   margin: 8px 0;
 }
 
+.upload {
+  width: 210px;
+}
+
+.upload::file-selector-button {
+  margin-right: 10px;
+  padding: 10px 30px;
+  background-color: #46e556;
+  color: #060303;
+  border: 1px solid green;
+  font-weight: 550;
+  font-size: 18px;
+  width: 200px;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+}
 .input-container input {
   background-color: #fff;
   padding: 1.5rem;
@@ -165,7 +191,7 @@ form {
 @media (max-width: 768px) {
   form {
     padding: 2rem;
-    height: 450px;
+    height: 550px;
     width: 80%;
   }
   .input-container input {

@@ -1,49 +1,107 @@
 <template>
-    <section>
-      <section v-for="post in responseData" :key="post.id">
-        <NewPost :posts="responseData"/>
-      </section>
+  <section>
+    <Loader :active="loaderActive" message="Please wait 5 seconds" />
+    <section class="input-section">
+      <input
+        type="text"
+        class="search"
+        v-model="searchvalue"
+        placeholder="Search by Name"
+        @:change="search(searchvalue)"
+      />
     </section>
+    <section v-for="post in responseData" :key="post.id">
+      <NewPost v-show="!loaderActive" :posts="responseData" :search="searchvalue" />
+    </section>
+  </section>
 </template>
 
 <script>
-import NewPost from './Child-Components/New-Post.vue';
-export default{
-    data(){
-        return{
-          responseData : null
-        }
-    },
-    components: {
-        NewPost,
-    },
-    provide(){
-    return{
-      token : localStorage.getItem('token')
-    }
+import NewPost from "./Child-Components/New-Post.vue";
+import Loader from "./Child-Components/Loader.vue";
+export default {
+  data() {
+    return {
+      loaderActive: false,
+      responseData: null,
+      searchvalue: "",
+    };
   },
-  inject:[
-    'token'
-  ],
-  mounted(){
-    console.log("mounted");
-    fetch('https://instagram-83t5.onrender.com/all-posts', {
-      method: 'GET',
+  methods: {
+    hideLoader() {
+      this.loaderActive = false;
+    },
+    showLoader() {
+      this.loaderActive = true;
+    },
+    search(searchvalue) {
+      this.showLoader();
+      fetch("https://instagram-83t5.onrender.com/all-posts", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          setTimeout(() => {
+            const filteredPosts = response.posts.filter((post) => {
+              return post.postedBy.name.includes(this.searchvalue);
+            });
+            if(filteredPosts.length == 0){
+              this.$toast.error("No posts found for this search");
+            }
+            this.responseData = filteredPosts;
+            console.log(filteredPosts);
+            this.hideLoader();
+          }, 2000);
+        });
+    },
+  },
+  components: {
+    NewPost,
+    Loader,
+  },
+  mounted() {
+    this.showLoader();
+    fetch("https://instagram-83t5.onrender.com/all-posts", {
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization' : "Bearer " + localStorage.getItem('token'),
-      }
-    }).then((response) => response.json())
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    })
+      .then((response) => response.json())
       .then((response) => {
-        console.log(response.posts);
-        this.responseData = response.posts
-      }
-    )
+        setTimeout(() => {
+          console.log(response.posts);
+          this.responseData = response.posts;
+        });
+        this.hideLoader();
+      }, 2000);
   },
-
-}
+};
 </script>
 
-<style>
+<style scoped>
+.search {
+  width: 300px;
+  height: 20px;
+  border-radius: 10px;
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px;
+  left: 50%;
+}
 
+.submit {
+  height: 40px;
+  width: 80px;
+}
+.input-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>

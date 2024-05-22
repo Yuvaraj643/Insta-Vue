@@ -23,7 +23,6 @@
         />
         <img
           src="../assets/comment.svg"
-          @:click="commentPost(text, post._id)"
           class="like-image"
           alt="comment"
         />
