@@ -127,6 +127,10 @@ button:active {
   nav img {
     width: 125px;
   }
+
+  .user-logo{
+    width: 50px;
+  }
 }
 
 @media (max-width: 480px) {

@@ -31,7 +31,7 @@
     </main>
     <post>
       <section>
-        
+
       </section>
     </post>
   </section>
@@ -150,5 +150,23 @@ main div img {
   cursor: pointer;
   font-size: 15px;
   padding: 10px 30px;
+}
+
+/* Responsive Styles */
+
+@media (max-width: 768px) {
+  main,main div {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-details h2{
+    margin: 10px;
+  }
+
+  
 }
 </style>

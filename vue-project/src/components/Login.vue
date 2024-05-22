@@ -135,7 +135,7 @@ form {
 
 .input-container input {
   background-color: rgb(246, 246, 249);
-  padding: 1.5rem;
+  padding: 1rem;
   padding-right: 3rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -187,6 +187,7 @@ form {
   }
   .input-container input {
     width: 75%;
+    padding: 18px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   }
   .form button {
@@ -203,6 +204,8 @@ form {
     max-width: 90%;
     margin-top: 0px;
   }
+
+  
 
   .form-title {
     font-size: 25px;
