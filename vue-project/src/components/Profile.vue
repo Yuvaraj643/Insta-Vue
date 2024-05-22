@@ -1,5 +1,6 @@
 <template>
-  <section>
+  <Loader :active="loaderActive" />
+  <section v-show="!loaderActive">
     <main>
       <div>
         <img :src="pic" alt="logo" />
@@ -29,57 +30,114 @@
       </div>
       <!-- <p >{{ data.followers.length }}</p> -->
     </main>
-    <post>
-      <section>
-
-      </section>
-    </post>
+    <br />
+    <hr />
+    <section id="main-post">
+      <post
+        id="main-post-section"
+        class="user-posts"
+        v-for="post in Userposts"
+        :key="post.id"
+      >
+        <section>
+          <img :src="post.photo" alt="logo" />
+        </section>
+        <div class="post-details">
+          <div class="int-section">
+            <img
+              v-if="post.likes.includes(id)"
+              @:click="unlikePost(post._id)"
+              src="./assets/like.svg"
+              class="like-image"
+              alt="like"
+            />
+            <img
+              v-else
+              src="./assets/!like.svg"
+              @:click="likePost(post._id)"
+              class="like-image"
+              alt="unlike"
+            />
+            <img src="./assets/comment.svg" class="like-image" alt="comment" />
+          </div>
+          <div class="post-desc">
+            <p>{{ post.likes.length }} Likes</p>
+            <span class="comment-section">
+              <input
+                ref="comment"
+                type="text"
+                class="comment-input"
+                v-model="text"
+                placeholder="Add a comment..."
+                @keyup.enter="commentPost(text, post._id)"
+              />
+            </span>
+            <p>{{ post.comments.length }} Comments</p>
+          </div>
+        </div>
+      </post>
+    </section>
   </section>
 </template>
 
 <script>
+import Loader from "./Child-Components/Loader.vue";
+
 export default {
   data() {
     return {
       Userposts: null,
       UserData: null,
       id: this.$route.params.id,
-      user: JSON.parse(localStorage.getItem("user")),
-      pic: JSON.parse(localStorage.getItem("user")).pic,
-      name: JSON.parse(localStorage.getItem("user")).name,
+      // user: JSON.parse(localStorage.getItem("user")),
+      // pic: JSON.parse(localStorage.getItem("user")).pic,
+      // name: JSON.parse(localStorage.getItem("user")).name,
+      // name : null,
+      pic: "",
       followers: null,
       following: null,
+      loaderActive: false,
     };
   },
   methods: {
-    
+    hideLoader() {
+      this.loaderActive = false;
+    },
+    showLoader() {
+      this.loaderActive = true;
+    },
   },
   mounted() {
-    fetch(`https://instagram-83t5.onrender.com/user/${this.user._id}`, {
+    this.showLoader();
+    fetch(`https://instagram-83t5.onrender.com/user/${this.id}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
-        this.UserData = response;
-        this.Userposts = response.posts;
-        if (response.user.followers.length == 0) {
-          this.followers = 0;
-        } else {
-          this.followers = response.user.followers.length;
-        }
-        if (response.user.following.length == 0) {
-          this.following = 0;
-        } else {
-          this.following = response.user.following.length;
-        }
-        // this.followers = response.user.followers
-        // this.following = response.user.following
+        setTimeout(() => {
+          console.log(response);
+          this.UserData = response;
+          this.Userposts = response.posts;
+          this.pic = response.user.pic;
+          if (response.user.followers.length == 0) {
+            this.followers = 0;
+          } else {
+            this.followers = response.user.followers.length;
+          }
+          if (response.user.following.length == 0) {
+            this.following = 0;
+          } else {
+            this.following = response.user.following.length;
+          }
+          this.hideLoader();
+        }, 2000);
       });
   },
-  components: {},
+  components: {
+    Loader,
+  },
   provide() {
     return {
       token: localStorage.getItem("token"),
@@ -89,6 +147,38 @@ export default {
 </script>
 
 <style scoped>
+#main-post {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+#main-post-section {
+  border-radius: 25px;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+.comment-section {
+  display: flex;
+  align-items: center;
+  /* gap: 10px; */
+}
+
+.comment-section1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.comment-input {
+  width: 85%;
+  height: 30px;
+  border-radius: 15px;
+  border: 2px solid rgb(121, 120, 202);
+  padding: 5px 15px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
 main {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
@@ -151,11 +241,54 @@ main div img {
   font-size: 15px;
   padding: 10px 30px;
 }
+post {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* post section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  width: 100%;
+} */
+
+post img {
+  width: 350px;
+  height: 500px;
+  border-radius: 20px;
+  margin: 20px;
+}
+
+.post-details {
+  width: 350px;
+  padding-left: 10px;
+  margin-left: 10px;
+}
+
+.user-posts {
+  display: flex;
+}
+
+.like-image {
+  width: 40px;
+  height: 40px;
+  margin: 0px 5px;
+}
+
+.post-desc p,
+input {
+  margin: 2px;
+  margin-left: 10px;
+}
 
 /* Responsive Styles */
 
 @media (max-width: 768px) {
-  main,main div {
+  main,
+  main div {
     max-width: 100%;
     display: flex;
     flex-direction: column;
@@ -163,10 +296,8 @@ main div img {
     justify-content: center;
   }
 
-  .user-details h2{
+  .user-details h2 {
     margin: 10px;
   }
-
-  
 }
 </style>

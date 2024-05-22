@@ -3,7 +3,7 @@
     <nav>
       <img
         src="./components/assets/logo.png"
-        @click="$router.push('/')"
+        @click="$router.push('/home')"
         alt="logo"
       />
       <div class="buttons-section">

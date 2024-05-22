@@ -1,6 +1,6 @@
 <template>
   <section>
-    <Loader :active="loaderActive" message="Please wait 5 seconds" />
+    <Loader :active="loaderActive"/>
     <section class="input-section">
       <input
         type="text"
@@ -78,7 +78,7 @@ export default {
       .then((response) => response.json())
       .then((response) => {
         setTimeout(() => {
-          // console.log(response.posts);
+          console.log(response.posts);
           this.responseData = response.posts;
         });
         this.hideLoader();
