@@ -55,6 +55,7 @@ export default {
       this.loaderActive = false;
     },
     login() {
+      this.$toast.warning("Please wait for 30 seconds until redirecting")    
       const user = {
         email: this.email,
         password: this.password,
