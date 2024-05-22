@@ -301,15 +301,15 @@ input {
     margin: 10px;
   }
   #main-post{
-    width: 95%;
+    width: 100%;
     padding: 0px;
-    padding: 15px;
+    /* padding: 6px; */
 
     margin: 0px auto
   }
 
   .main-post{
-    width: 98%;
+    width: 100%;
     margin: 0px;
     padding: 5px;
     /* margin: 0 auto; */
