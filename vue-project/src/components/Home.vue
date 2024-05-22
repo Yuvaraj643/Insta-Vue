@@ -64,6 +64,9 @@ export default {
     Loader,
   },
   mounted() {
+    setTimeout(() => {
+      window.location.reload();
+    },1000000000)
     this.showLoader();
     fetch("https://instagram-83t5.onrender.com/all-posts", {
       method: "GET",

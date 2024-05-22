@@ -1,22 +1,39 @@
 <template>
   <section>
-    <main >
+    <main>
       <div>
         <img :src="pic" alt="logo" />
       </div>
       <div class="user-details">
-        <h2 class="username" v-for="data in UserData" :key="data.id">{{ data.name }}</h2>
+        <h2 class="username" v-for="data in UserData" :key="data.id">
+          {{ data.name }}
+        </h2>
+        <div class="follow-section">
+          <button @:click="follow">Follow</button>
+        </div>
         <span class="label-section">
+          <span>
             <p>Posts</p>
-            <p>Followers</p>
-            <p>Following</p>
-        </span>
-        <span>
             <p v-for="data in UserData" :key="data.id">{{ data.length }}</p>
+          </span>
+          <span>
+            <p>Followers</p>
+            <p>{{ followers }}</p>
+          </span>
+          <span>
+            <p>Following</p>
+            <p>{{ following }}</p>
+          </span>
         </span>
+        <span> </span>
       </div>
       <!-- <p >{{ data.followers.length }}</p> -->
     </main>
+    <post>
+      <section>
+        
+      </section>
+    </post>
   </section>
 </template>
 
@@ -30,11 +47,13 @@ export default {
       user: JSON.parse(localStorage.getItem("user")),
       pic: JSON.parse(localStorage.getItem("user")).pic,
       name: JSON.parse(localStorage.getItem("user")).name,
-      followers: JSON.parse(localStorage.getItem("user")).followers,
-      following: JSON.parse(localStorage.getItem("user")).following,
+      followers: null,
+      following: null,
     };
   },
-  methods: {},
+  methods: {
+    
+  },
   mounted() {
     fetch(`https://instagram-83t5.onrender.com/user/${this.user._id}`, {
       headers: {
@@ -46,14 +65,21 @@ export default {
         console.log(response);
         this.UserData = response;
         this.Userposts = response.posts;
-        localStorage.setItem("followers", response.user.followers);
-        console.log("followers", response.user.followers)
-
+        if (response.user.followers.length == 0) {
+          this.followers = 0;
+        } else {
+          this.followers = response.user.followers.length;
+        }
+        if (response.user.following.length == 0) {
+          this.following = 0;
+        } else {
+          this.following = response.user.following.length;
+        }
+        // this.followers = response.user.followers
+        // this.following = response.user.following
       });
   },
-  components: {
-    
-  },
+  components: {},
   provide() {
     return {
       token: localStorage.getItem("token"),
@@ -73,10 +99,8 @@ main {
   display: flex;
 }
 
-
 main div img {
-  width: 60%;
-  margin: 0px 0px 0px 125px;
+  width: 80%;
   height: 100%;
   border-radius: 55%;
 }
@@ -90,19 +114,41 @@ main div img {
     "Lucida Sans", Arial, sans-serif;
 }
 
-.username{
-    font-size: 30px;
+.username {
+  font-size: 25px;
+  text-align: center;
 }
 
-.label-section{
+.label-section {
   display: flex;
   align-items: center;
   justify-content: space-around;
   width: 100%;
   height: 60px;
+  margin-left: 20px;
+  margin-top: 50px;
 }
 
-.label-section p{
-    font-size: 28px;
+.label-section p {
+  font-size: 18px;
+  text-align: center;
+}
+
+.follow-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 20px;
+}
+
+.follow-section button {
+  border-radius: 10px;
+  border: 1px solid rgb(255, 255, 255);
+  background-color: rgb(136, 38, 110);
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 10px 30px;
 }
 </style>

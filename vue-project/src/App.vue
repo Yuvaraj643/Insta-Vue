@@ -13,13 +13,8 @@
         >
         <div v-else class="buttons-section">
           <button @:click="logout">Logout</button>
-          <img
-            :src="user.pic"
-            class="user-logo"
-            alt="logo"
-          />
-          <!-- @click="$router.push({ path: `/profile/${user._id}` })" -->
-
+          <img :src="user.pic" @click="$router.push({ path: `/profile/${user._id}` })" class="user-logo" alt="logo" />
+          
         </div>
       </div>
     </nav>
@@ -34,27 +29,20 @@ export default {
   data() {
     return {
       user: JSON.parse(localStorage.getItem("user")),
-      token: localStorage.getItem('token')
+      token: localStorage.getItem("token"),
     };
-  },
-  computed:{
-      
-  },
-  watch:{
-     
-  },
-  mounted() {
   },
   methods: {
     logout() {
-      this.$toast.success("You logged out successfully");
       localStorage.removeItem("token");
       this.$router.push("/login");
+
       console.log("token removed");
+      setTimeout(() => {
+        window.location.reload();
+        this.$toast.success("You logged out successfully");
+      }, 100);
     },
-    myfun(event){
-      console.log('event exe :', event);
-    }
   },
   // inject: ["token"],
 };
