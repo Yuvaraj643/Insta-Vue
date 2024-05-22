@@ -44,11 +44,6 @@ export default {
      
   },
   mounted() {
-    // if(localStorage.token){
-    //   this.token = localStorage.token;
-    // }
-    console.log('my name');
-    window.addEventListener('storage', this.myfun)
   },
   methods: {
     logout() {

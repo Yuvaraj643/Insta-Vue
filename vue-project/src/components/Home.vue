@@ -75,7 +75,7 @@ export default {
       .then((response) => response.json())
       .then((response) => {
         setTimeout(() => {
-          console.log(response.posts);
+          // console.log(response.posts);
           this.responseData = response.posts;
         });
         this.hideLoader();
