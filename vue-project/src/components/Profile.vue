@@ -324,7 +324,8 @@ input {
   margin-bottom: 15px;
 }
 .post-details{
-  padding-left: 45px ;
+  width: 100%;
+  /* padding-left: 45px ; */
 }
 }
 </style>
