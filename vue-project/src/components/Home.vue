@@ -86,10 +86,9 @@ export default {
 
 <style scoped>
 .search {
-  width: 300px;
+  width: 50%;
   height: 20px;
   border-radius: 10px;
-  border: 1px solid black;
   margin: 10px;
   padding: 10px;
   left: 50%;
@@ -104,5 +103,11 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media screen and (max-width: 550px) {
+  .search{
+    width: 75%;
+  }
 }
 </style>

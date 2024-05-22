@@ -242,4 +242,18 @@ section {
   font-size: 16px;
   margin: 5px 0px;
 }
+
+/* Responsive Styles */
+
+@media (max-width: 550px) { 
+  .main-post {
+    width: 90%;
+  }
+
+  .post-image {
+    height: 300px;
+  }
+
+}
+
 </style>
