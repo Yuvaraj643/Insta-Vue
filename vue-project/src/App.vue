@@ -6,7 +6,6 @@
         @click="$router.push('/')"
         alt="logo"
       />
-      <!-- <h6>token === {{ token }}</h6> -->
       <div class="buttons-section">
         <Button @click="$router.push('/login')" v-if="!token">Login</Button>
         <Button v-if="!token" @click="$router.push('/register')"
@@ -17,9 +16,10 @@
           <img
             :src="user.pic"
             class="user-logo"
-            @click="$router.push({ path: `/profile/${user._id}` })"
             alt="logo"
           />
+          <!-- @click="$router.push({ path: `/profile/${user._id}` })" -->
+
         </div>
       </div>
     </nav>

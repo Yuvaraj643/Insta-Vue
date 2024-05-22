@@ -7,7 +7,7 @@
         class="search"
         v-model="searchvalue"
         placeholder="Search by Name"
-        @:change="search(searchvalue)"
+        @:input="search(searchvalue)"
       />
     </section>
     <section v-for="post in responseData" :key="post.id">
@@ -55,7 +55,7 @@ export default {
             this.responseData = filteredPosts;
             console.log(filteredPosts);
             this.hideLoader();
-          }, 2000);
+          }, 1000);
         });
     },
   },
@@ -93,6 +93,7 @@ export default {
   margin: 10px;
   padding: 10px;
   left: 50%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .submit {
