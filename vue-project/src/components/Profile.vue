@@ -40,7 +40,7 @@
         :key="post.id"
       >
         <section>
-          <img :src="post.photo" alt="logo" />
+          <img class="main-post" :src="post.photo" alt="logo" />
         </section>
         <div class="post-details">
           <div class="int-section">
@@ -72,7 +72,7 @@
                 @keyup.enter="commentPost(text, post._id)"
               />
             </span>
-            <p>{{ post.comments.length }} Comments</p>
+            <!-- <p>{{ post.comments.length }} Comments</p> -->
           </div>
         </div>
       </post>
@@ -173,6 +173,7 @@ export default {
 .comment-input {
   width: 85%;
   height: 30px;
+  margin-bottom: 15px;
   border-radius: 15px;
   border: 2px solid rgb(121, 120, 202);
   padding: 5px 15px;
@@ -299,5 +300,31 @@ input {
   .user-details h2 {
     margin: 10px;
   }
+  #main-post{
+    width: 95%;
+    padding: 0px;
+    padding: 15px;
+
+    margin: 0px auto
+  }
+
+  .main-post{
+    width: 98%;
+    margin: 0px;
+    padding: 5px;
+    /* margin: 0 auto; */
+  }
+
+  #main-post-section{
+    width: 100%;
+    padding: 2px;
+  }
+.comment-input{
+  width: 70%;
+  margin-bottom: 15px;
+}
+.post-details{
+  padding-left: 45px ;
+}
 }
 </style>
