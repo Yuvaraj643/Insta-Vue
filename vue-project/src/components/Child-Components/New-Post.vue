@@ -1,12 +1,14 @@
 <template>
   <section>
     <div class="main-post" v-for="post in posts" :key="post.id">
-      <span class="user-details" @click="$router.push({ path: `/profile/${post.postedBy._id}` })">
-
+      <span
+        class="user-details"
+        @click="$router.push({ path: `/profile/${post.postedBy._id}` })"
+      >
         <img v-bind:src="post.postedBy.pic" class="user-logo" alt="logo" />
         <p class="user-name">{{ post.postedBy.name }}</p>
       </span>
-      <img  :src="post.photo" alt="logo" class="post-image" />
+      <img :src="post.photo" alt="logo" class="post-image" />
       <span class="int-section">
         <img
           v-if="post.likes.includes(id)"
@@ -22,11 +24,7 @@
           class="like-image"
           alt="unlike"
         />
-        <img
-          src="../assets/comment.svg"
-          class="like-image"
-          alt="comment"
-        />
+        <img src="../assets/comment.svg" class="like-image" alt="comment" />
       </span>
       <span class="post-desc">
         <p>{{ post.likes.length }} Likes</p>
@@ -247,7 +245,7 @@ section {
 
 /* Responsive Styles */
 
-@media (max-width: 550px) { 
+@media (max-width: 550px) {
   .main-post {
     width: 95%;
     padding: 10px;
@@ -256,7 +254,5 @@ section {
   .post-image {
     height: 300px;
   }
-
 }
-
 </style>

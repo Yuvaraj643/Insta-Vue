@@ -1,6 +1,6 @@
 <template>
   <section>
-    <Loader :active="loaderActive"/>
+    <Loader :active="loaderActive" />
     <section class="input-section">
       <input
         type="text"
@@ -11,7 +11,11 @@
       />
     </section>
     <section v-for="post in responseData" :key="post.id">
-      <NewPost v-show="!loaderActive" :posts="responseData" :search="searchvalue" />
+      <NewPost
+        v-show="!loaderActive"
+        :posts="responseData"
+        :search="searchvalue"
+      />
     </section>
   </section>
 </template>
@@ -49,7 +53,7 @@ export default {
             const filteredPosts = response.posts.filter((post) => {
               return post.postedBy.name.includes(this.searchvalue);
             });
-            if(filteredPosts.length == 0){
+            if (filteredPosts.length == 0) {
               this.$toast.error("No posts found for this search");
             }
             this.responseData = filteredPosts;
@@ -66,7 +70,7 @@ export default {
   mounted() {
     setTimeout(() => {
       window.location.reload();
-    },1000000000)
+    }, 1000000000);
     this.showLoader();
     fetch("https://instagram-83t5.onrender.com/all-posts", {
       method: "GET",
@@ -109,7 +113,7 @@ export default {
 }
 
 @media screen and (max-width: 550px) {
-  .search{
+  .search {
     width: 75%;
   }
 }

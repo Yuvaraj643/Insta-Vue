@@ -90,7 +90,7 @@ export default {
       Userposts: null,
       UserData: null,
       id: this.$route.params.id,
-      userid : localStorage.getItem("id"),
+      userid: localStorage.getItem("id"),
       // user: JSON.parse(localStorage.getItem("user")),
       // pic: JSON.parse(localStorage.getItem("user")).pic,
       // name: JSON.parse(localStorage.getItem("user")).name,
@@ -117,7 +117,6 @@ export default {
         .then((response) => response.json())
         .then((response) => {
           console.log(response);
-         
         });
     },
     hideLoader() {
