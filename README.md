@@ -66,7 +66,7 @@ npm install
 Clone the project
 
 ```bash
-https://github.com/Yuvaraj643/Insta-Vue/tree/main
+git clone https://github.com/Yuvaraj643/Insta-Vue/tree/main
 ```
 Recommended IDE Setup
 ```bash
