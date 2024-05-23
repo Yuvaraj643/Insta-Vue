@@ -1,9 +1,9 @@
 <template>
-  <div
-    class="user-details-container"
-    :class="{ 'animate-scroll': animateScroll }"
-  >
-    <div class="user-details-wrapper">
+  <div class="user-details-container">
+    <div
+      class="user-details-wrapper"
+      :class="{ 'animate-scroll': animateScroll }"
+    >
       <img class="left" src="../assets/left.svg" @:click="scrollPrev" />
 
       <div
@@ -84,6 +84,7 @@ export default {
   align-items: center;
   gap: 15px;
   padding: 15px;
+  cursor: pointer;  
 }
 
 main img {
@@ -106,11 +107,10 @@ main img {
   justify-content: space-around;
 }
 /* add slow animation */
-.user-details-container.animate-scroll {
-  transition: transform s ease-in-out;
-  transform: translateX(0);
-  transform: translateX(-100%);
+.user-details-wrapper  {
+  transition: transform 0.5s ease-in-out;
 }
+
 
 .user-details {
   flex: 0 0 auto;
