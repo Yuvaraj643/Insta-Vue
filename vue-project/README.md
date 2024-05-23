@@ -92,7 +92,11 @@ npm run build
 
 ## :compass: Roadmap
 
-* [x] React js
+* [x] HTML  
+* [x] CSS
+* [x] JS
+* [x] Node js
+* [x] Express js
 * [ ] Vue js
 
 
@@ -102,7 +106,7 @@ npm run build
 
 Contributions are always welcome!
 
-see `contributing.md` for ways to get started
+<!-- see `contributing.md` for ways to get started -->
 
 ## :handshake: Contact
 
