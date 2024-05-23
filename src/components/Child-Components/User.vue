@@ -43,7 +43,7 @@ export default {
         this.users = response.users;
       });
     this.initializeVisibleUsers();
-    setInterval(this.scrollNext, 5000);
+    setInterval(this.scrollNext, 3000);
   },
 
   methods: {

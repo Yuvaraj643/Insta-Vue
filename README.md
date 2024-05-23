@@ -40,6 +40,7 @@
 - Posting and viewing of user posts
 - Liking and unliking of posts
 - Commenting on posts
+- Search Functionality
 - Viewing of user profiles and their posts
 
 
