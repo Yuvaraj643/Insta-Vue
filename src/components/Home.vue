@@ -10,7 +10,7 @@
         @:input="search(searchvalue)"
       />
     </section>
-    <section v-for="post in responseData" :key="post.id">
+    <section>
       <User v-show="!loaderActive" :posts="responseData" />
       <NewPost
         v-show="!loaderActive"

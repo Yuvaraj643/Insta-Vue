@@ -61,9 +61,10 @@
   </section>
 </template>
 <script>
-export default {
+export default {  
   data() {
     return {
+      posts : this.posts,
       id: localStorage.getItem("id"),
     };
   },

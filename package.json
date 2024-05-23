@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vueuse/core": "^10.9.0",
     "axios": "^1.7.0",
     "core-js": "^3.37.1",
     "intersection-observer": "^0.12.2",
