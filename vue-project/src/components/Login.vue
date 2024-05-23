@@ -1,6 +1,7 @@
 <template>
   <div>
-    <section>
+    <Loader :active="loaderActive" />
+    <section v-show="!loaderActive">
       <form class="form" @:submit.prevent="login">
         <p class="form-title">Sign in to your account</p>
         <div class="input-container">
@@ -35,6 +36,7 @@
 <script>
 import { RouterLink, RouterView } from "vue-router";
 import "vue-toast-notification/dist/theme-sugar.css";
+import Loader from "./Child-Components/Loader.vue";
 export default {
   data() {
     return {
@@ -45,7 +47,7 @@ export default {
     };
   },
   components: {
-    
+    Loader,
   },
   methods: {
     showLoader() {
@@ -55,7 +57,10 @@ export default {
       this.loaderActive = false;
     },
     login() {
-      this.$toast.warning("Please wait for 30 seconds until redirecting")    
+      this.showLoader();
+      this.$toast.warning("Please wait while we log you in", {
+        duration: 3000,
+      });
       const user = {
         email: this.email,
         password: this.password,
@@ -70,19 +75,19 @@ export default {
       })
         .then((response) => response.json())
         .then((response) => {
-            console.log("RESPONSE", response);
-            if (response.error) {
-              console.log("Invalid Username and Password");
-              this.$toast.error("Invalid Username and Password");
-            } else {
-              this.$toast.success("Login successful");
-              let token = localStorage.setItem("token", response.token);
-              localStorage.setItem("id", response.user._id);
-              this.user = response.user;
-              localStorage.setItem("user", JSON.stringify(this.user));
-              console.log(user);
-              this.$router.push("/home");
-            }
+          console.log("RESPONSE", response);
+          if (response.error) {
+            console.log("Invalid Username and Password");
+            this.$toast.error("Invalid Username and Password");
+          } else {
+            this.$toast.success("Login successful");
+            let token = localStorage.setItem("token", response.token);
+            localStorage.setItem("id", response.user._id);
+            this.user = response.user;
+            localStorage.setItem("user", JSON.stringify(this.user));
+            console.log(user);
+            this.$router.push("/home");
+          }
           this.hideLoader();
         }, 3000);
     },
@@ -205,8 +210,6 @@ form {
     max-width: 90%;
     margin-top: 0px;
   }
-
-  
 
   .form-title {
     font-size: 25px;

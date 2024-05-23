@@ -93,7 +93,7 @@ export default {
 
 <style scoped>
 .search {
-  width: 50%;
+  width:28%;
   height: 20px;
   border-radius: 10px;
   margin: 10px;
