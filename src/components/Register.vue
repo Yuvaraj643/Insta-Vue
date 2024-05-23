@@ -69,7 +69,7 @@ export default {
       };
       console.log(user);
       const response = axios
-        .post("https://instagram-83t5.onrender.com/signup", user)
+        .post("https://instagram-server-bye5.onrender.com/signup", user)
         .then((data) => {
           setTimeout(() => {
             console.log(data);

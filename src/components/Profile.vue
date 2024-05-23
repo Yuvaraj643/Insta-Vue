@@ -11,7 +11,7 @@
           {{ data.name }}
         </h2>
         <div class="follow-section">
-          <button @:click="follow(userid)">Follow</button>
+          <!-- <button @:click="follow(userid)">Follow</button> -->
         </div>
         <span class="label-section">
           <span>
@@ -104,7 +104,7 @@ export default {
   methods: {
     follow(userid) {
       console.log(userid);
-      fetch(`https://instagram-83t5.onrender.com/follow/`, {
+      fetch(`https://instagram-server-bye5.onrender.com/follow/`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -129,7 +129,7 @@ export default {
   mounted() {
     window.scrollTo(0, 0);
     this.showLoader();
-    fetch(`https://instagram-83t5.onrender.com/user/${this.id}`, {
+    fetch(`https://instagram-server-bye5.onrender.com/user/${this.id}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },

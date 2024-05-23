@@ -11,6 +11,7 @@
       />
     </section>
     <section v-for="post in responseData" :key="post.id">
+      <User v-show="!loaderActive" :posts="responseData" />
       <NewPost
         v-show="!loaderActive"
         :posts="responseData"
@@ -23,6 +24,7 @@
 <script>
 import NewPost from "./Child-Components/New-Post.vue";
 import Loader from "./Child-Components/Loader.vue";
+import User from "./Child-Components/User.vue";
 export default {
   data() {
     return {
@@ -40,7 +42,7 @@ export default {
     },
     search(searchvalue) {
       this.showLoader();
-      fetch("https://instagram-83t5.onrender.com/all-posts", {
+      fetch("https://instagram-server-bye5.onrender.com/all-posts", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -66,13 +68,14 @@ export default {
   components: {
     NewPost,
     Loader,
+    User,
   },
   mounted() {
     setTimeout(() => {
       window.location.reload();
     }, 1000000000);
     this.showLoader();
-    fetch("https://instagram-83t5.onrender.com/all-posts", {
+    fetch("https://instagram-server-bye5.onrender.com/all-posts", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -93,7 +96,7 @@ export default {
 
 <style scoped>
 .search {
-  width:28%;
+  width: 28%;
   height: 20px;
   border-radius: 10px;
   margin: 10px;

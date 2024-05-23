@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     likePost(id) {
-      fetch("https://instagram-83t5.onrender.com/like", {
+      fetch("https://instagram-server-bye5.onrender.com/like", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -87,7 +87,7 @@ export default {
         });
     },
     unlikePost(id) {
-      fetch("https://instagram-83t5.onrender.com/unlike", {
+      fetch("https://instagram-server-bye5.onrender.com/unlike", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -105,7 +105,7 @@ export default {
         });
     },
     commentPost(text, id) {
-      fetch("https://instagram-83t5.onrender.com/comment", {
+      fetch("https://instagram-server-bye5.onrender.com/comment", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -125,7 +125,7 @@ export default {
         });
     },
     DeletePost(id, postId) {
-      fetch(`https://instagram-83t5.onrender.com/delete-comment/${postId}`, {
+      fetch(`https://instagram-server-bye5.onrender.com/delete-comment/${postId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

@@ -66,7 +66,7 @@ export default {
         password: this.password,
       };
       console.log(user);
-      fetch("https://instagram-83t5.onrender.com/signin", {
+      fetch("https://instagram-server-bye5.onrender.com/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
