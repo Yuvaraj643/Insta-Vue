@@ -7,8 +7,8 @@
         <img :src="pic" alt="logo" />
       </div>
       <div class="user-details">
-        <h2 class="username" v-for="data in UserData" :key="data.id">
-          {{ data.name }}
+        <h2 class="username" >
+          {{ name }}
         </h2>
         <div class="follow-section">
           <!-- <button @:click="follow(userid)">Follow</button> -->
@@ -89,6 +89,7 @@ export default {
     return {
       Userposts: null,
       UserData: null,
+      name : null,
       id: this.$route.params.id,
       userid: localStorage.getItem("id"),
       // user: JSON.parse(localStorage.getItem("user")),
@@ -140,6 +141,8 @@ export default {
           console.log(response);
           this.UserData = response;
           this.Userposts = response.posts;
+          console.log(response.user.name);
+          this.name = response.user.name;
           this.pic = response.user.pic;
           if (response.user.followers.length == 0) {
             this.followers = 0;
@@ -237,7 +240,6 @@ main div img {
   width: 100%;
   height: 60px;
   margin-left: 20px;
-  margin-top: 50px;
 }
 
 .label-section p {

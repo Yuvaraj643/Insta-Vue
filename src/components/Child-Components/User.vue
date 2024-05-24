@@ -1,5 +1,5 @@
 <template>
-  <div class="user-details-container">
+  <div v-show="!loaderActive" class="user-details-container">
     <div
       class="user-details-wrapper"
       :class="{ 'animate-scroll': animateScroll }"
