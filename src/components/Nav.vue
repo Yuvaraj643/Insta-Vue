@@ -14,7 +14,7 @@
           <div v-else class="buttons-section">
             <button @:click="logout">Logout</button>
             <img :src="user.pic" @click="$router.push({ path: `/profile/${user._id}` })" class="user-logo" alt="logo" />
-            
+             
           </div>
         </div>
       </nav>

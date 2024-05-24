@@ -95,6 +95,7 @@ export default {
       // pic: JSON.parse(localStorage.getItem("user")).pic,
       // name: JSON.parse(localStorage.getItem("user")).name,
       // name : null,
+      
       pic: "",
       followers: null,
       following: null,
