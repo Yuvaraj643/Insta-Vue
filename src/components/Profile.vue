@@ -29,7 +29,6 @@
         </span>
         <span> </span>
       </div>
-      <!-- <p >{{ data.followers.length }}</p> -->
     </main>
     <br />
     <hr />
@@ -138,10 +137,10 @@ export default {
       .then((response) => response.json())
       .then((response) => {
         setTimeout(() => {
-          console.log(response);
+          // console.log(response);
           this.UserData = response;
           this.Userposts = response.posts;
-          console.log(response.user.name);
+          // console.log(response.user.name);
           this.name = response.user.name;
           this.pic = response.user.pic;
           if (response.user.followers.length == 0) {
@@ -240,6 +239,8 @@ main div img {
   width: 100%;
   height: 60px;
   margin-left: 20px;
+  margin-top: 25px;
+  gap: 15px;
 }
 
 .label-section p {
@@ -318,6 +319,7 @@ input {
     align-items: center;
     justify-content: center;
   }
+  
 
   .user-details h2 {
     margin: 10px;

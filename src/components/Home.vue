@@ -59,7 +59,7 @@ export default {
               this.$toast.error("No posts found for this search");
             }
             this.responseData = filteredPosts;
-            console.log(filteredPosts);
+            // console.log(filteredPosts);
             this.hideLoader();
           }, 1000);
         });

@@ -82,7 +82,7 @@ export default {
       })
         .then((response) => response.json())
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           this.$toast.success("Post liked successfully");
           window.location.reload();
         });
@@ -100,7 +100,7 @@ export default {
       })
         .then((response) => response.json())
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           this.$toast.success("Post unliked successfully");
           window.location.reload();
         });
@@ -119,7 +119,7 @@ export default {
       })
         .then((response) => response.json())
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           this.$toast.success("Comment added successfully");
           this.text = "";
           window.location.reload();
@@ -139,14 +139,14 @@ export default {
       })
         .then((response) => response.json())
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           this.$toast.success("Comment deleted successfully");
           window.location.reload();
         });
     },
   },
   components: {
-    Function,
+    
   },
   props: {
     posts: {
