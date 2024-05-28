@@ -2,12 +2,12 @@
     <div>
       <nav>
         <img
-          src="./components/assets/logo.png"
+          src="../components/assets/logo.png"
           @click="$router.push('/home')"
           alt="logo"
         />
         <div class="buttons-section">
-          <Button @click="$router.push('/login')" v-if="!token">Login</Button>
+          <Button @click="$router.push('/')" v-if="!token">Login</Button>
           <Button v-if="!token" @click="$router.push('/register')"
             >Register</Button
           >
@@ -35,7 +35,7 @@
     methods: {
       logout() {
         localStorage.removeItem("token");
-        this.$router.push("/login");
+        this.$router.push("/");
   
         console.log("token removed");
         setTimeout(() => {

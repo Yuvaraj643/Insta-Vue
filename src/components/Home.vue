@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import 'animate.css'
 import NewPost from "./Child-Components/New-Post.vue";
 import Loader from "./Child-Components/Loader.vue";
 import User from "./Child-Components/User.vue";

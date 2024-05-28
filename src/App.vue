@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav>
+    <!-- <nav class="animate__animated animate__fadeIn">
       <img
         src="./components/assets/logo.png"
         @click="$router.push('/home')"
@@ -17,14 +17,14 @@
           
         </div>
       </div>
-    </nav>
+    </nav> -->
     <RouterView />
   </div>
 </template>
 
 <script>
 import { RouterLink, RouterView } from "vue-router";
-
+import 'animate.css'
 export default {
   data() {
     return {

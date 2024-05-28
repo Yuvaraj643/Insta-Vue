@@ -1,8 +1,9 @@
 <template>
   <Loader :active="loaderActive" />
+  <Nav />
   <section v-show="!loaderActive">
     <br />
-    <main>
+    <main class="animate__animated animate__fadeInUp">
       <div>
         <img :src="pic" alt="logo" />
       </div>
@@ -35,7 +36,7 @@
     <section id="main-post">
       <post
         id="main-post-section"
-        class="user-posts"
+        class="user-posts animate__animated animate__fadeInUp"
         v-for="post in Userposts"
         :key="post.id"
       >
@@ -82,7 +83,7 @@
 
 <script>
 import Loader from "./Child-Components/Loader.vue";
-
+import Nav from '../components/Nav.vue'
 export default {
   data() {
     return {
@@ -95,7 +96,6 @@ export default {
       // pic: JSON.parse(localStorage.getItem("user")).pic,
       // name: JSON.parse(localStorage.getItem("user")).name,
       // name : null,
-      
       pic: "",
       followers: null,
       following: null,
@@ -160,6 +160,7 @@ export default {
   },
   components: {
     Loader,
+    Nav
   },
   provide() {
     return {

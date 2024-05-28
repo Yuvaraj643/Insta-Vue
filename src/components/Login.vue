@@ -1,8 +1,9 @@
 <template>
+  <Nav />
   <div>
     <Loader :active="loaderActive" />
     <section v-show="!loaderActive">
-      <form class="form" @:submit.prevent="login">
+      <form class="form animate__animated animate__slideInUp" @:submit.prevent="login">
         <p class="form-title">Sign in to your account</p>
         <div class="input-container">
           <input
@@ -11,7 +12,10 @@
             placeholder="Enter email"
             required
           />
-          <span> </span>
+          <span> 
+
+          </span>
+          
         </div>
         <div class="input-container">
           <input
@@ -34,6 +38,8 @@
 </template>
 
 <script>
+import 'animate.css'
+import Nav from '../components/Nav.vue';
 import { RouterLink, RouterView } from "vue-router";
 import "vue-toast-notification/dist/theme-sugar.css";
 import Loader from "./Child-Components/Loader.vue";
@@ -48,6 +54,7 @@ export default {
   },
   components: {
     Loader,
+    Nav,
   },
   methods: {
     showLoader() {

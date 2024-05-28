@@ -1,8 +1,9 @@
 <template>
   <Loader :active="loaderActive" />
+  <Nav />
   <div v-show="!loaderActive">
     <section>
-      <form class="form" @:submit.prevent="submit">
+      <form class="form animate__animated animate__slideInUp" @:submit.prevent="submit">
         <p class="form-title">Create your account</p>
         <div class="input-container">
           <input type="name" placeholder="Enter name" v-model="name" required />
@@ -40,6 +41,7 @@ import { RouterLink, RouterView } from "vue-router";
 import axios from "axios";
 import "vue-toast-notification/dist/theme-sugar.css";
 import Loader from "./Child-Components/Loader.vue";
+import Nav from "../components/Nav.vue"
 export default {
   data() {
     return {
@@ -51,6 +53,7 @@ export default {
   },
   components: {
     Loader,
+    Nav
   },
   methods: {
     showLoader() {

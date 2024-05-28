@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="main-post" v-for="post in posts" :key="post.id">
+    <div class="main-post animate__animated animate__fadeInUp" v-for="post in posts" :key="post.id">
       <span
         class="user-details"
         @click="$router.push({ path: `/profile/${post.postedBy._id}` })"
@@ -66,6 +66,7 @@ export default {
     return {
       posts : this.posts,
       id: localStorage.getItem("id"),
+      text: "",
     };
   },
   methods: {

@@ -1,17 +1,18 @@
 <template>
-  <div v-show="!loaderActive" class="user-details-container">
+  <div class="user-details-container">
     <div
       class="user-details-wrapper"
-      :class="{ 'animate-scroll': animateScroll }"
+  
     >
       <img class="left" src="../assets/left.svg" @:click="scrollPrev" />
 
       <div
-        class="user-details"
+        class="user-details "
         v-for="(user, index) in visibleUsers"
         :key="index"
+        
       >
-        <main @click="$router.push(`/profile/${user._id}`)">
+        <main  @click="$router.push(`/profile/${user._id}`)">
           <img :src="user.pic" class="user-logo" alt="logo" />
           <p>{{ user.name }}</p>
         </main>
@@ -22,6 +23,7 @@
 </template>
 
 <script>
+  import 'animate.css'
 export default {
   data() {
     return {
